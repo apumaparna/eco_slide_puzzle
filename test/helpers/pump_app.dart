@@ -32,7 +32,7 @@ extension PumpApp on WidgetTester {
         ],
         child: MaterialApp(
           localizationsDelegates: const [
-            // AppLocalizations.delegate,
+            AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
           ],
           supportedLocales: const [
