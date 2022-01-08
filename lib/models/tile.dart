@@ -7,6 +7,7 @@ import 'package:eco_slide_puzzle/models/models.dart';
 class Tile extends Equatable {
   /// {@macro tile}
   const Tile({
+    required this.imagePath,
     required this.value,
     required this.correctPosition,
     required this.currentPosition,
@@ -15,6 +16,9 @@ class Tile extends Equatable {
 
   /// Value representing the correct position of [Tile] in a list.
   final int value;
+
+  // Image that is displayed on the tile;
+  final String imagePath;
 
   /// The correct 2D [Position] of the [Tile]. All tiles must be in their
   /// correct position to complete the puzzle.
@@ -29,6 +33,7 @@ class Tile extends Equatable {
   /// Create a copy of this [Tile] with updated current position.
   Tile copyWith({required Position currentPosition}) {
     return Tile(
+      imagePath: imagePath,
       value: value,
       correctPosition: correctPosition,
       currentPosition: currentPosition,

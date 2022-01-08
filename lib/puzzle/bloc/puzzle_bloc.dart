@@ -145,6 +145,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
       for (int i = 1; i <= size * size; i++)
         if (i == size * size)
           Tile(
+            imagePath: 'assets/images/tester.jpg',
             value: i,
             correctPosition: whitespacePosition,
             currentPosition: currentPositions[i - 1],
@@ -152,6 +153,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
           )
         else
           Tile(
+            imagePath: 'assets/images/tester.jpg',
             value: i,
             correctPosition: correctPositions[i - 1],
             currentPosition: currentPositions[i - 1],

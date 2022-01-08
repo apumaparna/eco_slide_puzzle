@@ -316,38 +316,14 @@ class SimplePuzzleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.select((ThemeBloc bloc) => bloc.state.theme);
-
-    return TextButton(
-      style: TextButton.styleFrom(
-        primary: PuzzleColors.white,
-        textStyle: PuzzleTextStyle.headline2.copyWith(
-          fontSize: tileFontSize,
-        ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12),
-          ),
-        ),
-      ).copyWith(
-        foregroundColor: MaterialStateProperty.all(PuzzleColors.white),
-        backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-          (states) {
-            if (tile.value == state.lastTappedTile?.value) {
-              return theme.pressedColor;
-            } else if (states.contains(MaterialState.hovered)) {
-              return theme.hoverColor;
-            } else {
-              return theme.defaultColor;
-            }
-          },
-        ),
-      ),
-      onPressed: state.puzzleStatus == PuzzleStatus.incomplete
-          ? () => context.read<PuzzleBloc>().add(TileTapped(tile))
-          : null,
-      child: Text(tile.value.toString()),
-    );
+    return IconButton(
+        padding: const EdgeInsets.all(0.0),
+        onPressed: state.puzzleStatus == PuzzleStatus.incomplete
+            ? () => context.read<PuzzleBloc>().add(TileTapped(tile))
+            : null,
+        icon: ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(tile.imagePath)));
   }
 }
 
