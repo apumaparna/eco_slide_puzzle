@@ -7,7 +7,7 @@ import 'package:eco_slide_puzzle/layout/layout.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
 import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
 import 'package:eco_slide_puzzle/theme/theme.dart';
-import 'package:eco_slide_puzzle/typography/typography.dart';
+// import 'package:eco_slide_puzzle/typography/typography.dart';
 
 /// {@template simple_puzzle_layout_delegate}
 /// A delegate for computing the layout of the puzzle UI

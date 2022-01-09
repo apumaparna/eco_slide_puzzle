@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image/image.dart' as img_lib;
 import 'package:eco_slide_puzzle/models/models.dart';
+import 'package:flutter/cupertino.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
@@ -159,5 +163,34 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
             currentPosition: currentPositions[i - 1],
           )
     ];
+  }
+
+  List<Image> splitImage(String originalImagePath, int size) {
+    // extract the Image from the path
+    img_lib.Image? image = img_lib.decodeNamedImage(
+        File('assets/images/tester.jpg').readAsBytesSync(), 'tester.jpg');
+
+    int x = 0, y = 0;
+    int width = ((image?.width)! / size).round();
+    int height = ((image?.height)! / size).round();
+
+    // split image to parts
+    List<img_lib.Image> parts = [];
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        parts.add(img_lib.copyCrop(image!, x, y, width, height));
+        x += width;
+      }
+      x = 0;
+      y += height;
+    }
+
+    // convert image from image package to Image Widget to display
+    List<Image> output = [];
+    for (var img in parts) {
+      output.add(Image.memory(Uint8List.fromList(img_lib.encodeJpg(img))));
+    }
+
+    return output;
   }
 }
