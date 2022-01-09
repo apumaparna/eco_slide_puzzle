@@ -323,7 +323,7 @@ class SimplePuzzleTile extends StatelessWidget {
             : null,
         icon: ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset(tile.imagePath)));
+            child: Image.asset(tile.imagePath + tile.value.toString() + ".jpg")));
   }
 }
 

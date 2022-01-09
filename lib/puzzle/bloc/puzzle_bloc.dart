@@ -24,6 +24,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
 
   final Random? random;
 
+  String imgPath = 'assets/images/owl/';
   void _onPuzzleInitialized(
     PuzzleInitialized event,
     Emitter<PuzzleState> emit,
@@ -149,7 +150,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
       for (int i = 1; i <= size * size; i++)
         if (i == size * size)
           Tile(
-            imagePath: 'assets/images/tester.jpg',
+            imagePath: imgPath,
             value: i,
             correctPosition: whitespacePosition,
             currentPosition: currentPositions[i - 1],
@@ -157,7 +158,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
           )
         else
           Tile(
-            imagePath: 'assets/images/tester.jpg',
+            imagePath: imgPath,
             value: i,
             correctPosition: correctPositions[i - 1],
             currentPosition: currentPositions[i - 1],
@@ -168,7 +169,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   List<Image> splitImage(String originalImagePath, int size) {
     // extract the Image from the path
     img_lib.Image? image = img_lib.decodeNamedImage(
-        File('assets/images/tester.jpg').readAsBytesSync(), 'tester.jpg');
+        File(imgPath).readAsBytesSync(), 'puffin.jpg');
 
     int x = 0, y = 0;
     int width = ((image?.width)! / size).round();

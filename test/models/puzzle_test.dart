@@ -2,57 +2,58 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
 
 void main() {
+  const String imgPath = 'assets/images/puffin';
   const unsolvable3x3Tile0 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 0,
     correctPosition: Position(x: 3, y: 3),
     currentPosition: Position(x: 3, y: 3),
     isWhitespace: true,
   );
   const unsolvable3x3Tile1 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 1,
     correctPosition: Position(x: 1, y: 1),
     currentPosition: Position(x: 2, y: 1),
   );
   const unsolvable3x3Tile2 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 2,
     correctPosition: Position(x: 2, y: 1),
     currentPosition: Position(x: 1, y: 1),
   );
   const unsolvable3x3Tile3 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 3,
     correctPosition: Position(x: 3, y: 1),
     currentPosition: Position(x: 3, y: 1),
   );
   const unsolvable3x3Tile4 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 4,
     correctPosition: Position(x: 1, y: 2),
     currentPosition: Position(x: 1, y: 2),
   );
   const unsolvable3x3Tile5 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 5,
     correctPosition: Position(x: 2, y: 2),
     currentPosition: Position(x: 2, y: 2),
   );
   const unsolvable3x3Tile6 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 6,
     correctPosition: Position(x: 3, y: 2),
     currentPosition: Position(x: 3, y: 2),
   );
   const unsolvable3x3Tile7 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 7,
     correctPosition: Position(x: 1, y: 3),
     currentPosition: Position(x: 1, y: 3),
   );
   const unsolvable3x3Tile8 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 8,
     correctPosition: Position(x: 2, y: 3),
     currentPosition: Position(x: 2, y: 3),
@@ -74,55 +75,55 @@ void main() {
   const solvable3x3Puzzle = Puzzle(
     tiles: [
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 2,
         correctPosition: Position(x: 2, y: 1),
         currentPosition: Position(x: 3, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 1,
         correctPosition: Position(x: 1, y: 1),
         currentPosition: Position(x: 1, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 3,
         correctPosition: Position(x: 3, y: 1),
         currentPosition: Position(x: 2, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 4,
         correctPosition: Position(x: 1, y: 2),
         currentPosition: Position(x: 3, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 5,
         correctPosition: Position(x: 2, y: 2),
         currentPosition: Position(x: 1, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 6,
         correctPosition: Position(x: 3, y: 2),
         currentPosition: Position(x: 3, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 7,
         correctPosition: Position(x: 1, y: 3),
         currentPosition: Position(x: 1, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 8,
         correctPosition: Position(x: 2, y: 3),
         currentPosition: Position(x: 2, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 0,
         correctPosition: Position(x: 3, y: 3),
         currentPosition: Position(x: 2, y: 2),
@@ -134,97 +135,97 @@ void main() {
   const unsolvable4x4Puzzle = Puzzle(
     tiles: [
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 1,
         correctPosition: Position(x: 1, y: 1),
         currentPosition: Position(x: 1, y: 1),
       ),
-      Tile(
-        imagePath: 'assets/images/tester.jpg',
+        Tile(
+        imagePath: imgPath,
         value: 2,
         correctPosition: Position(x: 2, y: 1),
         currentPosition: Position(x: 2, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 3,
         correctPosition: Position(x: 3, y: 1),
         currentPosition: Position(x: 3, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 4,
         correctPosition: Position(x: 4, y: 1),
         currentPosition: Position(x: 4, y: 1),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 5,
         correctPosition: Position(x: 1, y: 2),
         currentPosition: Position(x: 1, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 6,
         correctPosition: Position(x: 2, y: 2),
         currentPosition: Position(x: 2, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 7,
         correctPosition: Position(x: 3, y: 2),
         currentPosition: Position(x: 3, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 8,
         correctPosition: Position(x: 4, y: 2),
         currentPosition: Position(x: 4, y: 2),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 9,
         correctPosition: Position(x: 1, y: 3),
         currentPosition: Position(x: 1, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 10,
         correctPosition: Position(x: 2, y: 3),
         currentPosition: Position(x: 2, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 11,
         correctPosition: Position(x: 3, y: 3),
         currentPosition: Position(x: 3, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 12,
         correctPosition: Position(x: 4, y: 3),
         currentPosition: Position(x: 4, y: 3),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 13,
         correctPosition: Position(x: 1, y: 4),
         currentPosition: Position(x: 1, y: 4),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 14,
         correctPosition: Position(x: 2, y: 4),
         currentPosition: Position(x: 3, y: 4),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 15,
         correctPosition: Position(x: 3, y: 4),
         currentPosition: Position(x: 2, y: 4),
       ),
       Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 0,
         correctPosition: Position(x: 4, y: 4),
         currentPosition: Position(x: 4, y: 4),
@@ -234,26 +235,26 @@ void main() {
   );
 
   const solvable2x2Tile0 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 0,
     correctPosition: Position(x: 2, y: 2),
     currentPosition: Position(x: 1, y: 1),
     isWhitespace: true,
   );
   const solvable2x2Tile1 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 1,
     correctPosition: Position(x: 1, y: 1),
     currentPosition: Position(x: 2, y: 1),
   );
   const solvable2x2Tile2 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 2,
     correctPosition: Position(x: 2, y: 1),
     currentPosition: Position(x: 2, y: 2),
   );
   const solvable2x2Tile3 = Tile(
-    imagePath: 'assets/images/tester.jpg',
+    imagePath: imgPath,
     value: 3,
     correctPosition: Position(x: 1, y: 2),
     currentPosition: Position(x: 1, y: 2),
@@ -270,7 +271,7 @@ void main() {
   group('Puzzle', () {
     group('getPuzzleDimension', () {
       const tile = Tile(
-        imagePath: 'assets/images/tester.jpg',
+        imagePath: imgPath,
         value: 1,
         correctPosition: Position(x: 1, y: 1),
         currentPosition: Position(x: 1, y: 1),
@@ -303,7 +304,7 @@ void main() {
         const puzzle = Puzzle(
           tiles: [
             Tile(
-              imagePath: 'assets/images/tester.jpg',
+              imagePath: imgPath,
               value: 0,
               correctPosition: Position(x: 1, y: 1),
               currentPosition: Position(x: 1, y: 1),
