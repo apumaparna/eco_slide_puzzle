@@ -8,6 +8,7 @@ import '../../helpers/helpers.dart';
 void main() {
   final position = Position(x: 1, y: 1);
   final tile = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 0,
     correctPosition: position,
     currentPosition: position,

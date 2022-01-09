@@ -6,11 +6,13 @@ import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
 void main() {
   final position = Position(x: 1, y: 1);
   final tile1 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 1,
     correctPosition: position,
     currentPosition: position,
   );
   final tile2 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 2,
     correctPosition: position,
     currentPosition: position,

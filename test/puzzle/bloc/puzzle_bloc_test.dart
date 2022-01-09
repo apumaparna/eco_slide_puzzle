@@ -10,46 +10,55 @@ void main() {
   const seed = 2;
 
   final size3Tile1 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 1,
     correctPosition: Position(x: 1, y: 1),
     currentPosition: Position(x: 1, y: 3),
   );
   final size3Tile2 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 2,
     correctPosition: Position(x: 2, y: 1),
     currentPosition: Position(x: 1, y: 1),
   );
   final size3Tile3 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 3,
     correctPosition: Position(x: 3, y: 1),
     currentPosition: Position(x: 2, y: 3),
   );
   final size3Tile4 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 4,
     correctPosition: Position(x: 1, y: 2),
     currentPosition: Position(x: 2, y: 1),
   );
   final size3Tile5 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 5,
     correctPosition: Position(x: 2, y: 2),
     currentPosition: Position(x: 3, y: 2),
   );
   final size3Tile6 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 6,
     correctPosition: Position(x: 3, y: 2),
     currentPosition: Position(x: 1, y: 2),
   );
   final size3Tile7 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 7,
     correctPosition: Position(x: 1, y: 3),
     currentPosition: Position(x: 3, y: 3),
   );
   final size3Tile8 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 8,
     correctPosition: Position(x: 2, y: 3),
     currentPosition: Position(x: 2, y: 2),
   );
   final size3Tile9 = Tile(
+    imagePath: 'assets/images/tester.jpg',
     value: 9,
     correctPosition: Position(x: 3, y: 3),
     currentPosition: Position(x: 3, y: 1),
@@ -132,47 +141,56 @@ void main() {
       final bottomRight = Position(x: 3, y: 3);
 
       final topLeftTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 1,
         correctPosition: topLeft,
         currentPosition: topLeft,
       );
       final topCenterTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 2,
         correctPosition: topCenter,
         currentPosition: topCenter,
       );
       final topRightTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 3,
         correctPosition: topRight,
         currentPosition: topRight,
       );
       final middleLeftTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 4,
         correctPosition: middleLeft,
         currentPosition: middleLeft,
       );
       final middleCenterTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 5,
         correctPosition: middleCenter,
         currentPosition: middleCenter,
       );
       final middleRightTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 6,
         correctPosition: middleRight,
         currentPosition: middleRight,
       );
       final bottomLeftTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 7,
         correctPosition: bottomLeft,
         currentPosition: bottomLeft,
       );
       final whitespaceTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 0,
         correctPosition: bottomRight,
         currentPosition: bottomCenter,
         isWhitespace: true,
       );
       final bottomRightTile = Tile(
+        imagePath: 'assets/images/tester.jpg',
         value: 8,
         correctPosition: bottomCenter,
         currentPosition: bottomRight,
@@ -208,6 +226,7 @@ void main() {
                 topRightTile,
                 middleLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 0,
                   correctPosition: bottomRight,
                   currentPosition: middleCenter,
@@ -216,6 +235,7 @@ void main() {
                 middleRightTile,
                 bottomLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 5,
                   correctPosition: middleCenter,
                   currentPosition: bottomCenter,
@@ -245,6 +265,7 @@ void main() {
               tiles: [
                 topLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 0,
                   correctPosition: bottomRight,
                   currentPosition: topCenter,
@@ -253,6 +274,7 @@ void main() {
                 topRightTile,
                 middleLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 2,
                   correctPosition: topCenter,
                   currentPosition: middleCenter,
@@ -260,6 +282,7 @@ void main() {
                 middleRightTile,
                 bottomLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 5,
                   correctPosition: middleCenter,
                   currentPosition: bottomCenter,
@@ -330,11 +353,13 @@ void main() {
                 middleRightTile,
                 bottomLeftTile,
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 8,
                   correctPosition: bottomCenter,
                   currentPosition: bottomCenter,
                 ),
                 Tile(
+                  imagePath: 'assets/images/tester.jpg',
                   value: 0,
                   correctPosition: bottomRight,
                   currentPosition: bottomRight,
@@ -358,11 +383,13 @@ void main() {
       final initialSize3Puzzle = Puzzle(
         tiles: [
           Tile(
+            imagePath: 'assets/images/tester.jpg',
             value: 1,
             correctPosition: Position(x: 1, y: 1),
             currentPosition: Position(x: 1, y: 1),
           ),
           Tile(
+            imagePath: 'assets/images/tester.jpg',
             value: 7,
             correctPosition: Position(x: 1, y: 3),
             currentPosition: Position(x: 2, y: 1),
