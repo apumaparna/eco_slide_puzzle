@@ -46,6 +46,9 @@ dependencies:
   intl: ^0.17.0
   image: ^3.1.0
   intl_utils: ^2.6.0
+  path_provider: ^2.0.8
+  # file_saver: ^0.0.10
+  # flutter_archive: ^4.1.1
 
 dev_dependencies:
   flutter_test:
