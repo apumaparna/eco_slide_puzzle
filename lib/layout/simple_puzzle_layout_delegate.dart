@@ -322,8 +322,9 @@ class SimplePuzzleTile extends StatelessWidget {
             ? () => context.read<PuzzleBloc>().add(TileTapped(tile))
             : null,
         icon: ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset(tile.imagePath + tile.value.toString() + ".jpg")));
+            // borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset(
+                tile.imagePath + (tile.value - 1).toString() + ".jpg")));
   }
 }
 
