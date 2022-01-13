@@ -15,7 +15,10 @@ import '../../helpers/helpers.dart';
 void main() {
   group('PuzzlePage', () {
     testWidgets('renders PuzzleView', (tester) async {
-      await tester.pumpApp(PuzzlePage());
+      await tester.pumpApp(PuzzlePage(
+        size: 4,
+        imagePath: 'assets/images/tester/',
+      ));
       expect(find.byType(PuzzleView), findsOneWidget);
     });
   });
@@ -67,7 +70,10 @@ void main() {
       when(() => theme.backgroundColor).thenReturn(backgroundColor);
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -86,7 +92,10 @@ void main() {
       tester.setLargeDisplaySize();
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -99,7 +108,10 @@ void main() {
       tester.setMediumDisplaySize();
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -112,7 +124,10 @@ void main() {
       tester.setSmallDisplaySize();
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -121,7 +136,10 @@ void main() {
 
     testWidgets('renders puzzle header', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -130,7 +148,10 @@ void main() {
 
     testWidgets('renders puzzle sections', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -141,7 +162,10 @@ void main() {
         'builds start section '
         'with layoutDelegate.startSectionBuilder', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -152,7 +176,10 @@ void main() {
         'builds end section '
         'with layoutDelegate.endSectionBuilder', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -163,7 +190,10 @@ void main() {
         'builds background '
         'with layoutDelegate.backgroundBuilder', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -174,7 +204,10 @@ void main() {
         'builds board '
         'with layoutDelegate.boardBuilder', (tester) async {
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -193,7 +226,10 @@ void main() {
       });
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -212,7 +248,10 @@ void main() {
       });
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 
@@ -238,7 +277,10 @@ void main() {
       });
 
       await tester.pumpApp(
-        PuzzleView(),
+        PuzzleView(
+          size: 4,
+          imagePath: 'assets/images/tester/',
+        ),
         themeBloc: themeBloc,
       );
 

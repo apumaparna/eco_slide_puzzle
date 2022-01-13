@@ -13,8 +13,12 @@ import 'package:eco_slide_puzzle/timer/timer.dart';
 /// from [ThemeBloc].
 /// {@endtemplate}
 class PuzzlePage extends StatelessWidget {
+  final String imagePath;
+  final int size;
+
   /// {@macro puzzle_page}
-  const PuzzlePage({Key? key}) : super(key: key);
+  const PuzzlePage({Key? key, required this.size, required this.imagePath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,10 @@ class PuzzlePage extends StatelessWidget {
           SimpleTheme(),
         ],
       ),
-      child: const PuzzleView(),
+      child: PuzzleView(
+        size: size,
+        imagePath: imagePath,
+      ),
     );
   }
 }
@@ -33,8 +40,12 @@ class PuzzlePage extends StatelessWidget {
 /// Displays the content for the [PuzzlePage].
 /// {@endtemplate}
 class PuzzleView extends StatelessWidget {
+  final String imagePath;
+  final int size;
+
   /// {@macro puzzle_view}
-  const PuzzleView({Key? key}) : super(key: key);
+  const PuzzleView({Key? key, required this.size, required this.imagePath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +61,7 @@ class PuzzleView extends StatelessWidget {
           ticker: const Ticker(),
         ),
         child: BlocProvider(
-          create: (context) => PuzzleBloc(3, 'assets/images/owl/')
+          create: (context) => PuzzleBloc(size, imagePath)
             ..add(
               PuzzleInitialized(
                 shufflePuzzle: shufflePuzzle,

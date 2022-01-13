@@ -10,6 +10,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:eco_slide_puzzle/generated/l10n.dart';
 
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -46,6 +46,7 @@ dependencies:
   image: ^3.1.0
   intl_utils: ^2.6.0
   path_provider: ^2.0.8
+  flutter_localized_locales: ^2.0.3
   # file_saver: ^0.0.10
   # flutter_archive: ^4.1.1
 
@@ -70,6 +71,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/tester/
     - assets/images/owl/
     - assets/images/puffin/
   fonts:

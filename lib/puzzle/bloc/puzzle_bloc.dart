@@ -1,14 +1,10 @@
 // ignore_for_file: public_member_api_docs
 
-import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:image/image.dart' as img_lib;
 import 'package:eco_slide_puzzle/models/models.dart';
-import 'package:flutter/cupertino.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
