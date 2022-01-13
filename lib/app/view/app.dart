@@ -60,44 +60,37 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    final navigatorKey = GlobalKey<NavigatorState>();
+    //final navigatorKey = GlobalKey<NavigatorState>();
     return MaterialApp(
-        navigatorKey: navigatorKey,
-        builder: (context, child) {
-          return Scaffold(
-            appBar: AppBar(
-                // automaticallyImplyLeading: true,
-                leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                navigatorKey.currentState?.pop(context);
-              },
-            )),
-            body:
-                child, //this child is dynamically replaced with corresponding page when we navigate
-          );
-        },
-        theme: ThemeData(
-          appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-          colorScheme: ColorScheme.fromSwatch(
-            accentColor: const Color(0xFF13B9FF),
-          ),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: const Color(0xFF13B9FF),
         ),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate
-        ],
-        supportedLocales: const [
-          Locale('en', 'US'),
-        ],
-        // AppLocalizations.supportedLocales,
-        home: const Home()
-        //     const PuzzlePage(
-        //   size: 3,
-        //   imagePath: 'assets/images/owl/',
-        // ),
-        );
+      ),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('en', 'US'),
+      ],
+      // AppLocalizations.supportedLocales,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Home(),
+        '/puzzle1': (context) =>
+            const PuzzlePage(size: 3, imagePath: 'assets/images/owl/'),
+        '/puzzle2': (context) =>
+            const PuzzlePage(size: 4, imagePath: 'assets/images/tester/'),
+      },
+      // home: const Home()
+      //     const PuzzlePage(
+      //   size: 3,
+      //   imagePath: 'assets/images/owl/',
+      // ),
+    );
   }
 }

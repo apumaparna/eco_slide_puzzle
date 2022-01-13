@@ -55,6 +55,9 @@ class PuzzleView extends StatelessWidget {
     final shufflePuzzle = theme is SimpleTheme;
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
       backgroundColor: theme.backgroundColor,
       body: BlocProvider(
         create: (context) => TimerBloc(
