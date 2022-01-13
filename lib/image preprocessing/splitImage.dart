@@ -3,17 +3,16 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
 import 'package:image/image.dart' as img_lib;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  _splitImage('assets/images/tester.jpg', 4);
-}
+// void main() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   _splitImage('assets/images/tester.jpg', 4);
+// }
 
-Future<void> _splitImage(String originalImagePath, int size) async {
+Future<void> splitImage(String originalImagePath, int size) async {
   // extract the Image from the path
   img_lib.Image? image;
 

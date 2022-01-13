@@ -8,8 +8,10 @@
 import 'package:eco_slide_puzzle/app/app.dart';
 import 'package:eco_slide_puzzle/bootstrap.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:eco_slide_puzzle/image preprocessing/splitImage.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await splitImage('assets/images/owl.jpg', 3);
   bootstrap(() => const App());
 }

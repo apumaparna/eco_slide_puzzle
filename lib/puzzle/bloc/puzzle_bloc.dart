@@ -14,7 +14,8 @@ part 'puzzle_event.dart';
 part 'puzzle_state.dart';
 
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
-  PuzzleBloc(this._size, {this.random}) : super(const PuzzleState()) {
+  PuzzleBloc(this._size, this.imgPath, {this.random})
+      : super(const PuzzleState()) {
     on<PuzzleInitialized>(_onPuzzleInitialized);
     on<TileTapped>(_onTileTapped);
     on<PuzzleReset>(_onPuzzleReset);
@@ -24,7 +25,8 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
 
   final Random? random;
 
-  String imgPath = 'assets/images/owl/';
+  String imgPath;
+
   void _onPuzzleInitialized(
     PuzzleInitialized event,
     Emitter<PuzzleState> emit,
@@ -166,32 +168,32 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
     ];
   }
 
-  List<Image> splitImage(String originalImagePath, int size) {
-    // extract the Image from the path
-    img_lib.Image? image = img_lib.decodeNamedImage(
-        File(imgPath).readAsBytesSync(), 'puffin.jpg');
+  // List<Image> splitImage(String originalImagePath, int size) {
+  //   // extract the Image from the path
+  //   img_lib.Image? image =
+  //       img_lib.decodeNamedImage(File(imgPath).readAsBytesSync(), 'puffin.jpg');
 
-    int x = 0, y = 0;
-    int width = ((image?.width)! / size).round();
-    int height = ((image?.height)! / size).round();
+  //   int x = 0, y = 0;
+  //   int width = ((image?.width)! / size).round();
+  //   int height = ((image?.height)! / size).round();
 
-    // split image to parts
-    List<img_lib.Image> parts = [];
-    for (int i = 0; i < size; i++) {
-      for (int j = 0; j < size; j++) {
-        parts.add(img_lib.copyCrop(image!, x, y, width, height));
-        x += width;
-      }
-      x = 0;
-      y += height;
-    }
+  //   // split image to parts
+  //   List<img_lib.Image> parts = [];
+  //   for (int i = 0; i < size; i++) {
+  //     for (int j = 0; j < size; j++) {
+  //       parts.add(img_lib.copyCrop(image!, x, y, width, height));
+  //       x += width;
+  //     }
+  //     x = 0;
+  //     y += height;
+  //   }
 
-    // convert image from image package to Image Widget to display
-    List<Image> output = [];
-    for (var img in parts) {
-      output.add(Image.memory(Uint8List.fromList(img_lib.encodeJpg(img))));
-    }
+  //   // convert image from image package to Image Widget to display
+  //   List<Image> output = [];
+  //   for (var img in parts) {
+  //     output.add(Image.memory(Uint8List.fromList(img_lib.encodeJpg(img))));
+  //   }
 
-    return output;
-  }
+  //   return output;
+  // }
 }
