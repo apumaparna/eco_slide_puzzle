@@ -93,7 +93,7 @@ void main() {
     ],
   );
 
-  final String folderPath = 'assets/images/owl/';
+  const String folderPath = 'assets/images/owl/';
 
   group('PuzzleBloc', () {
     test('initial state is PuzzleState', () {
