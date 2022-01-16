@@ -48,7 +48,9 @@ dependencies:
   path_provider: ^2.0.8
   flutter_localized_locales: ^2.0.3
   firebase: ^9.0.2
-  firebase_core: ^0.4.2+2
+  firebase_core: ^1.11.0
+  firebase_analytics: ^9.0.5
+  firebase_auth: ^3.3.5
   # file_saver: ^0.0.10
   # flutter_archive: ^4.1.1
 
