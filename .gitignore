@@ -47,6 +47,4 @@ app.*.map.json
 /android/app/release
 
 # Firebase related filed 
-web/firebase_config.js
-ios/Runner/GoogleService-Info.plist
-android/app/google-services.json
+lib/firebase_options.dart
