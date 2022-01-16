@@ -2,6 +2,8 @@
 import 'package:eco_slide_puzzle/routes.dart';
 import 'package:eco_slide_puzzle/screens/Landing/landing_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:eco_slide_puzzle/utils/authentication_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatelessWidget {
   static var routeName = '/home';
@@ -46,8 +48,13 @@ class Home extends StatelessWidget {
         ),
         const Spacer(),
         ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, LandingScreen.routeName);
+            onPressed: () async {
+              return context
+                  .read<AuthenticationService>()
+                  .signOut().then((success) {
+                    if (success) {
+                      Navigator.pushNamed(context, LandingScreen.routeName);
+                    }});
             },
             child: const Text('LOG OUT')),
         const Spacer(),
