@@ -1,11 +1,8 @@
-// import 'package:eco_slide_puzzle/auth/authentication_service.dart';
+import 'package:eco_slide_puzzle/utils/authentication_service.dart';
 import 'package:eco_slide_puzzle/constants.dart';
 import 'package:eco_slide_puzzle/screens/home/home.dart';
-// import 'package:eco_slide_puzzle/screens/Dashboard/dashboard_screen.dart';
-// import 'package:eco_slide_puzzle/screens/home.dart';
 import 'package:flutter/material.dart';
-// import 'package:arc_app/size_config.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class LogInCard extends StatelessWidget {
@@ -49,7 +46,16 @@ class LogInCard extends StatelessWidget {
                   const Padding(padding: EdgeInsets.all(15.0)),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, Home.routeName);
+                      context
+                          .read<AuthenticationService>()
+                          .signIn(
+                              email: emailController.text,
+                              password: passwordController.text)
+                          .then((success) {
+                        if (success) {
+                          Navigator.pushNamed(context, Home.routeName);
+                        }
+                      });
                     },
                     child: const Padding(
                       padding:

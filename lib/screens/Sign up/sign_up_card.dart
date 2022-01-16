@@ -2,7 +2,11 @@
 //import 'package:firebase_database/firebase_database.dart';
 import 'package:eco_slide_puzzle/constants.dart';
 import 'package:eco_slide_puzzle/screens/home/home.dart';
+import 'package:eco_slide_puzzle/utils/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpCard extends StatefulWidget {
@@ -25,7 +29,7 @@ class _SignUpCardState extends State<SignUpCard> {
 
   @override
   Widget build(BuildContext context) {
-    // final ref = fb.reference();
+    // final ref = fb.ref();
 
     return Card(
         elevation: 25.0,
@@ -102,7 +106,21 @@ class _SignUpCardState extends State<SignUpCard> {
                       TextButton(
                         onPressed: () {
                           if (signUpFormKey.currentState!.validate()) {
-                            Navigator.pushNamed(context, Home.routeName);
+                            print("ready to validate");
+                            context
+                                .read<AuthenticationService>()
+                                .signUp(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    username: usernameController.text)
+                                .then((success) {
+                              if (success) {
+                                User user = FirebaseAuth.instance.currentUser!;
+                                print("User created with uid: " + user.uid);
+                                // ref.child(user.uid);
+                                Navigator.pushNamed(context, Home.routeName);
+                              }
+                            });
                           }
                         },
                         child: const Padding(

@@ -8,7 +8,7 @@
 import 'package:eco_slide_puzzle/app/app.dart';
 import 'package:eco_slide_puzzle/bootstrap.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:eco_slide_puzzle/image preprocessing/splitImage.dart';
+// import 'package:eco_slide_puzzle/image preprocessing/splitImage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
