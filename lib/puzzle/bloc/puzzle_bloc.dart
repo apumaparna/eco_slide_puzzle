@@ -3,13 +3,20 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+
+import '../../data/data_repository.dart';
+import '../../models/player.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
 
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
+
   PuzzleBloc(this._size, this.imgPath, {this.random})
       : super(const PuzzleState()) {
     on<PuzzleInitialized>(_onPuzzleInitialized);
@@ -20,8 +27,9 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   final int _size;
 
   final Random? random;
-
+  var curPlayer;
   String imgPath;
+  final DataRepository repository = DataRepository();
 
   void _onPuzzleInitialized(
     PuzzleInitialized event,
@@ -33,7 +41,9 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
         puzzle: puzzle.sort(),
         numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
       ),
+
     );
+    curPlayer = setupPlayer();
   }
 
   void _onTileTapped(TileTapped event, Emitter<PuzzleState> emit) {
@@ -53,6 +63,8 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
               lastTappedTile: tappedTile,
             ),
           );
+          // update the database
+
         } else {
           emit(
             state.copyWith(
@@ -192,4 +204,41 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
 
   //   return output;
   // }
+
+  Future<Player?> setupPlayer() async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    var email = FirebaseAuth.instance.currentUser!.email;
+    print ("uid " + uid);
+    print ("email " + email!);
+
+    try {
+     var _gamePlayer =
+      await repository.getPlayer(uid);
+
+      if (_gamePlayer == null) {
+        print (" player is null");
+
+        if (uid != null && email != null) {
+          _gamePlayer = new Player(
+              email: email,
+              uid: uid,
+              dateCreated: DateTime.now(),
+              scoreBoard: new ScoreBoard(
+                datePlayed: DateTime.now(),
+                numberOfMoves: 0,
+                timeTaken: 0, score: 0,
+              ));
+
+          repository.addPlayer(_gamePlayer);
+          return _gamePlayer;
+        }
+      } else {
+        print('Found it');
+        print(_gamePlayer.email);
+      }
+    }catch (error){
+      print("Exception is caught ........");
+      print(error.toString());
+    }
+  }
 }

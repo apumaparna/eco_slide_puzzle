@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
+import 'package:flutter/cupertino.dart';
 
 // A 3x3 puzzle board visualization:
 //
@@ -37,6 +38,7 @@ class Puzzle extends Equatable {
 
   /// List of [Tile]s representing the puzzle's current arrangement.
   final List<Tile> tiles;
+
 
   /// Get the dimension of a puzzle given its tile arrangement.
   ///
