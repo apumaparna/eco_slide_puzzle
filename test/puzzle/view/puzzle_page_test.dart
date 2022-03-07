@@ -18,6 +18,7 @@ void main() {
       await tester.pumpApp(PuzzlePage(
         size: 4,
         imagePath: 'assets/images/tester/',
+
       ));
       expect(find.byType(PuzzleView), findsOneWidget);
     });

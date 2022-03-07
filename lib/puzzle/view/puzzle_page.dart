@@ -1,3 +1,4 @@
+import 'package:eco_slide_puzzle/data/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eco_slide_puzzle/layout/layout.dart';
@@ -64,7 +65,8 @@ class PuzzleView extends StatelessWidget {
           ticker: const Ticker(),
         ),
         child: BlocProvider(
-          create: (context) => PuzzleBloc(size, imagePath)
+          create: (context) => PuzzleBloc(size, imagePath,
+           repository:  DataRepository())
             ..add(
               PuzzleInitialized(
                 shufflePuzzle: shufflePuzzle,
@@ -242,6 +244,7 @@ class PuzzleBoard extends StatelessWidget {
         if (theme.hasTimer && state.puzzleStatus == PuzzleStatus.complete) {
           context.read<TimerBloc>().add(const TimerStopped());
         }
+
       },
       child: theme.layoutDelegate.boardBuilder(
         size,
@@ -276,4 +279,6 @@ class _PuzzleTile extends StatelessWidget {
         ? theme.layoutDelegate.whitespaceTileBuilder()
         : theme.layoutDelegate.tileBuilder(tile, state);
   }
+
+
 }
