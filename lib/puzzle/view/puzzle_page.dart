@@ -7,6 +7,8 @@ import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
 import 'package:eco_slide_puzzle/theme/theme.dart';
 import 'package:eco_slide_puzzle/timer/timer.dart';
 
+import 'LoadingOverlay.dart';
+
 /// {@template puzzle_page}
 /// The root page of the puzzle UI.
 ///
@@ -229,7 +231,9 @@ class _PuzzleSections extends StatelessWidget {
 /// {@endtemplate}
 class PuzzleBoard extends StatelessWidget {
   /// {@macro puzzle_board}
+
   const PuzzleBoard({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -241,6 +245,7 @@ class PuzzleBoard extends StatelessWidget {
 
     return BlocListener<PuzzleBloc, PuzzleState>(
       listener: (context, state) {
+
         if (theme.hasTimer && state.puzzleStatus == PuzzleStatus.complete) {
           context.read<TimerBloc>().add(const TimerStopped());
         }

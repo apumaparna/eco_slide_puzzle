@@ -33,24 +33,24 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   final DataRepository repository;
   String imgPath;
 
-  ScoreBoard scoreBoard = ScoreBoard(score: 0, numberOfMoves: 0, timeTaken: 0, datePlayed: DateTime.now());
+  ScoreBoard scoreBoard = ScoreBoard(score: 0, numberOfMoves: 0, timeTaken: 0,
+      datePlayed: DateTime.now(), size: 0);
 
 
   void _onPuzzleInitialized (
     PuzzleInitialized event,
     Emitter<PuzzleState> emit,
   ) async {
-
+      scoreBoard.size = _size;
       //final puzzle = await _generatePuzzle(_size, shuffle: event.shufflePuzzle);
       final puzzle = await _generatePuzzle(_size, shuffle: false);
-
-      // setupPlayer();
 
       emit(
         PuzzleState(
           puzzle: puzzle.sort(),
           puzzleStatus: PuzzleStatus.incomplete,
           numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
+          numberOfMovesTotal: scoreBoard.numberOfMoves,
         ),
 
       );
@@ -69,6 +69,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
         final mutablePuzzle = Puzzle(tiles: [...state.puzzle.tiles]);
         final puzzle = mutablePuzzle.moveTiles(tappedTile, []);
         if (puzzle.isComplete() && emit.isDone) {
+          await updateScoreBoard(1);
           emit(
             state.copyWith(
               puzzle: puzzle.sort(),
@@ -76,27 +77,27 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
               tileMovementStatus: TileMovementStatus.moved,
               numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
               numberOfMoves: state.numberOfMoves + 1,
+              numberOfMovesTotal: scoreBoard.numberOfMoves,
               lastTappedTile: tappedTile,
             ),
           );
-          // update the database
-          //updatePlayer(state.numberOfMoves);
-           await updateScoreBoard(1);
+
+
           await updateTiles(uid, state.puzzle.tiles);
         } else {
+          await updateScoreBoard(1);
           emit(
+
             state.copyWith(
               puzzle: puzzle.sort(),
               tileMovementStatus: TileMovementStatus.moved,
               numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
               numberOfMoves: state.numberOfMoves + 1,
+              numberOfMovesTotal: scoreBoard.numberOfMoves,
               lastTappedTile: tappedTile,
             ),
           );
 
-          // update the database
-          //updatePlayer(state.numberOfMoves);
-          await updateScoreBoard(1);
 
           await updateTiles(uid, state.puzzle.tiles);
         }
@@ -122,6 +123,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
       PuzzleState(
         puzzle: puzzle.sort(),
         puzzleStatus: PuzzleStatus.incomplete,
+        numberOfMovesTotal: scoreBoard.numberOfMoves,
         numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
       ),
     );
@@ -135,9 +137,13 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
     final currentPositions = <Position>[];
     final whitespacePosition = Position(x: size, y: size);
 
-    await repository.getTiles(_uid, tiles);
-    print( " TILES " + tiles.toString());
-    tiles.forEach((element) { print(" OUTSIDE GET TILES " + element.toJson().toString()); });
+    await repository.getTiles(_uid, _size, tiles);
+   // print( " TILES " + tiles.toString());
+    /*
+    tiles.forEach((element) {
+      print(" OUTSIDE GET TILES " + element.toJson().toString()); });
+
+     */
     if (tiles.isNotEmpty && !shuffle){
       print ("=============== Saved tiles found");
       shuffle = false;
@@ -313,23 +319,13 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   }
   updateTiles(String uid, List<Tile> tiles) async{
     print(" Updating tiles");
-      await repository.updateTiles(uid, tiles);
+      await repository.updateTiles(uid,_size, tiles);
   }
 
   updateScoreBoard(int moves) async {
     try {
       var uid = FirebaseAuth.instance.currentUser!.uid;
-      /*
-      bool hasVal = false;
-      if (moves == 0) {
-        hasVal = await  repository.getScoreBoard(uid, scoreBoard);
-        print (" Got from DB " + hasVal.toString());
-        if (!hasVal) {
-         scoreBoard = ScoreBoard(score: 0, numberOfMoves: 0,
-             timeTaken: 0, datePlayed: DateTime.now());
-          }
-        }
-*/
+
       print(" Score Board " + scoreBoard.toJson().toString());
 
         ScoreBoard toUpdate;

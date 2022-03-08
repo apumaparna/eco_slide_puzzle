@@ -68,7 +68,7 @@ class DataRepository {
     });
   }
 
-  updateTiles(String uid, List<Tile> tiles) async {
+  updateTiles(String uid, int size, List<Tile> tiles) async {
     print("Going to update " + uid);
     try {
       var tileList = [];
@@ -81,7 +81,7 @@ class DataRepository {
 
       });
 
-      await ref.child(uid + "/tile/" ).update(
+      await ref.child(uid + "/" + size.toString() + "/tile/" ).update(
           tempMap).
       whenComplete(() => print("Tile updated"));
       /*
@@ -102,27 +102,30 @@ class DataRepository {
     }
   }
 
-  getTiles(String uid, List<Tile> tiles) async {
+  getTiles(String uid, int size, List<Tile> tiles) async {
    // print("Going to get Tile for  " + uid);
 
-    await ref.child(uid + "/tile/").once().then((result) {
+    await ref.child(uid + "/" + size.toString() + "/tile/").once().then((result) {
       var res = result.snapshot.value;
-      print (res.toString());
+     // print (res.toString());
       if (res == null) {
         return null;
       }
       List value = result.snapshot.value as List<dynamic>;
-
+      tiles.clear();
+      /*
         tiles.forEach((element ) {
           tiles.remove(element as Map);
         });
+        */
+
         value.forEach((element) {
             if (element != null) {
               tiles.add(Tile.fromJson(element as Map));
             }
 
         });
-      tiles.forEach((element) { print(" INSIDE GET TILES " + element.toJson().toString()); });
+      //tiles.forEach((element) { print(" INSIDE GET TILES " + element.toJson().toString()); });
 
     });
   }
@@ -130,7 +133,7 @@ class DataRepository {
   updateScoreBoard(String uid, ScoreBoard scoreBoard) async {
    // print("Going to update score board" + uid);
     try {
-        await ref.child(uid + "/score/" ).update(
+        await ref.child(uid + "/" + scoreBoard.size.toString() + "/score/" ).update(
             scoreBoard.toJson()).
         whenComplete(() => print("Score updated"));
 
@@ -147,15 +150,17 @@ class DataRepository {
     bool isUpdated = false;
 
     DatabaseReference starCountRef =
-    ref.child(uid + "/score/");
+    ref.child(uid + "/" + sb.size.toString() + "/score/");
 
     await starCountRef.onValue.listen((DatabaseEvent event) {
 
       var sbTemp = ScoreBoard.fromJson(event.snapshot.value as Map<String, dynamic>);
+
       sb.numberOfMoves = sbTemp.numberOfMoves;
       sb.datePlayed = sbTemp.datePlayed;
       sb.timeTaken = sbTemp.timeTaken;
       sb.score = sbTemp.score;
+      sb.size = sbTemp.size;
       print(" Score Saved is " + sb.toString());
       isUpdated = true;
     });
@@ -165,7 +170,7 @@ class DataRepository {
   getStartupScoreBoard(String uid, ScoreBoard sb) async {
    // print("Going to get score board " + uid);
 
-    await ref.child(uid + "/score/").once().then((result) {
+    await ref.child((uid + "/" + sb.size.toString() + "/score/")).once().then((result) {
       var res = result.snapshot.value;
       if (res == null) {
         return null;
@@ -177,6 +182,7 @@ class DataRepository {
       sb.datePlayed = sbTemp.datePlayed;
       sb.timeTaken = sbTemp.timeTaken;
       sb.score = sbTemp.score;
+      sb.size = sb.size;
      // print (" Score board GOT " + value.toString());
 
       print (" Score board GOT from Json " + sb.toJson().toString());

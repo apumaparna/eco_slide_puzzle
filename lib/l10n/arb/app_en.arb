@@ -8,6 +8,10 @@
     "@puzzleNumberOfMoves": {
         "description": "Indicates how many moves have been made on the current puzzle"
     },
+    "puzzleNumberOfMovesTotal": "Total Moves",
+        "@puzzleNumberOfMovesTotal": {
+            "description": "Indicates how many moves have been made on puzzle in total"
+        },
     "puzzleNumberOfTilesLeft": "Tiles",
     "@puzzleNumberOfTilesLeft": {
         "description": "Indicates how many puzzle tiles are not in their correct position"

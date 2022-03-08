@@ -15,6 +15,7 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
     Key? key,
     required this.numberOfMoves,
     required this.numberOfTilesLeft,
+    required this.numberOfMovesTotal,
     this.color,
   }) : super(key: key);
 
@@ -24,6 +25,8 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
   /// The number of tiles left to be displayed.
   final int numberOfTilesLeft;
 
+  // Total moves so far
+  final int numberOfMovesTotal;
   /// The color of texts that display [numberOfMoves] and [numberOfTilesLeft].
   /// Defaults to [PuzzleTheme.defaultColor].
   final Color? color;
@@ -51,10 +54,25 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
               color: textColor,
             ),
             children: [
+
               TextSpan(
                 text:
                     //'text',
                     ' ${context.l10n.puzzleNumberOfMoves} | ',
+                style: bodyTextStyle.copyWith(
+                  color: textColor,
+                ),
+              ),
+              TextSpan(
+                text: numberOfMovesTotal.toString(),
+                style: PuzzleTextStyle.headline4.copyWith(
+                  color: textColor,
+                ),
+              ),
+              TextSpan(
+                text:
+                //'text',
+                ' ${context.l10n.puzzleNumberOfMovesTotal} | ',
                 style: bodyTextStyle.copyWith(
                   color: textColor,
                 ),

@@ -3,12 +3,14 @@ class ScoreBoard {
    int numberOfMoves=0;
    int timeTaken=0;
   DateTime datePlayed;
+  int size;
 
   ScoreBoard(
       {required this.score,
         required this.numberOfMoves,
         required this.timeTaken,
-        required this.datePlayed});
+        required this.datePlayed,
+      required this.size});
 
   factory ScoreBoard.fromJson(Map<dynamic?, dynamic?> json) =>
       _ScoreBoardFromJson(json);
@@ -27,7 +29,8 @@ ScoreBoard _ScoreBoardFromJson(Map<dynamic, dynamic> json) {
       score: json['score'],
       numberOfMoves: json['numberOfMoves'],
       datePlayed: DateTime.parse(json['datePlayed']),
-      timeTaken: json['timeTaken']);
+      timeTaken: json['timeTaken'],
+      size :json['size']);
 }
 
 Map<String, dynamic> _ScoreBoardToJson(ScoreBoard instance) =>
@@ -36,4 +39,5 @@ Map<String, dynamic> _ScoreBoardToJson(ScoreBoard instance) =>
       'numberOfMoves': instance.numberOfMoves,
       'datePlayed': instance.datePlayed.toIso8601String(),
       'timeTaken': instance.timeTaken,
+      'size' : instance.size
     };
