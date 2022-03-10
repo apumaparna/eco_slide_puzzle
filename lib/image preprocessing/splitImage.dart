@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 
 // void main() {
 //   WidgetsFlutterBinding.ensureInitialized();
-//   _splitImage('assets/images/tester.jpg', 4);
+//   _splitImage('assets/images/solution.jpg', 4);
 // }
 
 Future<void> splitImage(String originalImagePath, int size) async {

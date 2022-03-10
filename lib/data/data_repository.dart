@@ -77,22 +77,13 @@ class DataRepository {
 
 
         tempMap.putIfAbsent(element.value.toString(), () => element.toJson());
-        //tileList.add(tempMap);
+
 
       });
 
       await ref.child(uid + "/" + size.toString() + "/tile/" ).update(
           tempMap).
       whenComplete(() => print("Tile updated"));
-      /*
-      tiles.forEach((element) async {
-        //print(" Tile " + element.toJson().toString());
-
-        await ref.child(uid + "/tile/" + element.value.toString() + "/").update(
-            element.toJson()).
-        whenComplete(() => print("Tile updated"));
-      });
-      */
 
       return;
     }
@@ -113,11 +104,6 @@ class DataRepository {
       }
       List value = result.snapshot.value as List<dynamic>;
       tiles.clear();
-      /*
-        tiles.forEach((element ) {
-          tiles.remove(element as Map);
-        });
-        */
 
         value.forEach((element) {
             if (element != null) {
@@ -155,13 +141,16 @@ class DataRepository {
     await starCountRef.onValue.listen((DatabaseEvent event) {
 
       var sbTemp = ScoreBoard.fromJson(event.snapshot.value as Map<String, dynamic>);
-
+      sb.copyWith(sbTemp);
+      /*
       sb.numberOfMoves = sbTemp.numberOfMoves;
       sb.datePlayed = sbTemp.datePlayed;
       sb.timeTaken = sbTemp.timeTaken;
       sb.score = sbTemp.score;
       sb.size = sbTemp.size;
       print(" Score Saved is " + sb.toString());
+
+       */
       isUpdated = true;
     });
     return isUpdated;
@@ -178,11 +167,15 @@ class DataRepository {
       Map<String, dynamic> value = result.snapshot.value as Map<String,
           dynamic>;
       var sbTemp = ScoreBoard.fromJson(value);
+      sb.copyWith(sbTemp);
+      /*
       sb.numberOfMoves = sbTemp.numberOfMoves;
       sb.datePlayed = sbTemp.datePlayed;
       sb.timeTaken = sbTemp.timeTaken;
       sb.score = sbTemp.score;
       sb.size = sb.size;
+      */
+
      // print (" Score board GOT " + value.toString());
 
       print (" Score board GOT from Json " + sb.toJson().toString());

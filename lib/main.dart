@@ -15,7 +15,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await splitImage('assets/images/owl.jpg', 3);
+  // await splitImage('assets/images/solution.jpg', 3);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

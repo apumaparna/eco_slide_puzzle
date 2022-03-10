@@ -74,8 +74,9 @@ class PuzzleView extends StatelessWidget {
                 shufflePuzzle: shufflePuzzle,
               ),
             ),
-          child: const _Puzzle(
+          child:  _Puzzle(
             key: Key('puzzle_view_puzzle'),
+            imagePath: imagePath,
           ),
         ),
       ),
@@ -84,7 +85,8 @@ class PuzzleView extends StatelessWidget {
 }
 
 class _Puzzle extends StatelessWidget {
-  const _Puzzle({Key? key}) : super(key: key);
+  final String imagePath;
+ _Puzzle({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +98,7 @@ class _Puzzle extends StatelessWidget {
         return Stack(
           children: [
             theme.layoutDelegate.backgroundBuilder(state),
+            theme.layoutDelegate.PuzzleSolutonImageBuilder(imagePath),
             SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(

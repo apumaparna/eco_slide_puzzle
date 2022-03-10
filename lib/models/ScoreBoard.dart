@@ -22,6 +22,13 @@ class ScoreBoard {
   }
 
  */
+  copyWith(ScoreBoard sb){
+      this.size = sb.size;
+      this.numberOfMoves = sb.numberOfMoves;
+      this.score = sb.score;
+      this.timeTaken = sb.timeTaken;
+      this.datePlayed = sb.datePlayed;
+  }
 }
 
 ScoreBoard _ScoreBoardFromJson(Map<dynamic, dynamic> json) {
@@ -41,3 +48,4 @@ Map<String, dynamic> _ScoreBoardToJson(ScoreBoard instance) =>
       'timeTaken': instance.timeTaken,
       'size' : instance.size
     };
+

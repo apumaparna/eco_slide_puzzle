@@ -52,4 +52,6 @@ abstract class PuzzleLayoutDelegate extends Equatable {
 
   /// A widget builder for the whitespace puzzle tile.
   Widget whitespaceTileBuilder();
+
+  Widget PuzzleSolutonImageBuilder(String imagePath);
 }
