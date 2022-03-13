@@ -62,6 +62,7 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
           height: 118,
           child: Image.asset(
             'assets/images/simple_dash_small.png',
+
             key: const Key('simple_puzzle_dash_small'),
           ),
         ),
@@ -70,6 +71,7 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
           height: 214,
           child: Image.asset(
             'assets/images/simple_dash_medium.png',
+
             key: const Key('simple_puzzle_dash_medium'),
           ),
         ),
@@ -79,7 +81,8 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
             width: 568.99,
             height: 320,
             child: Image.asset(
-              'assets/images/simple_dash_large.png',
+            'assets/images/simple_dash_large.png',
+
               key: const Key('simple_puzzle_dash_large'),
             ),
           ),
@@ -162,6 +165,47 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
 
   @override
   List<Object?> get props => [];
+
+  @override
+  Widget PuzzleSolutonImageBuilder(String imagePath) {
+
+    return Positioned(
+      right: 0,
+      top: 0,
+      child: ResponsiveLayoutBuilder(
+        small: (_, __) => SizedBox(
+          width: 184,
+          height: 118,
+          child: Image.asset(
+            imagePath + "solution.jpg",
+
+            key: const Key('answerImageURL'),
+          ),
+        ),
+        medium: (_, __) => SizedBox(
+          width: 380.44,
+          height: 214,
+          child: Image.asset(
+            imagePath + "solution.jpg",
+
+            key: const Key('answerImageURL'),
+          ),
+        ),
+        large: (_, __) => Padding(
+          padding: const EdgeInsets.only(bottom: 53),
+          child: SizedBox(
+            width: 568.99,
+            height: 320,
+            child: Image.asset(
+              imagePath + "/solution.jpg",
+
+              key: const Key('answerImageURL'),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 /// {@template simple_start_section}
@@ -201,6 +245,7 @@ class SimpleStartSection extends StatelessWidget {
         NumberOfMovesAndTilesLeft(
           numberOfMoves: state.numberOfMoves,
           numberOfTilesLeft: state.numberOfTilesLeft,
+          numberOfMovesTotal: state.numberOfMovesTotal,
         ),
         const ResponsiveGap(large: 32),
         ResponsiveLayoutBuilder(

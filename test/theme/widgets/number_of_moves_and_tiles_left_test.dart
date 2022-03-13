@@ -28,6 +28,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 10,
           numberOfTilesLeft: 15,
         ),
         themeBloc: themeBloc,
@@ -45,6 +46,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 10,
           numberOfTilesLeft: 15,
         ),
         themeBloc: themeBloc,
@@ -62,6 +64,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 10,
           numberOfTilesLeft: 15,
         ),
         themeBloc: themeBloc,
@@ -77,6 +80,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 10,
           numberOfTilesLeft: 15,
         ),
         themeBloc: themeBloc,
@@ -94,6 +98,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 5,
           numberOfTilesLeft: 15,
           color: color,
         ),
@@ -118,6 +123,7 @@ void main() {
       await tester.pumpApp(
         NumberOfMovesAndTilesLeft(
           numberOfMoves: 5,
+          numberOfMovesTotal: 5,
           numberOfTilesLeft: 15,
         ),
         themeBloc: themeBloc,

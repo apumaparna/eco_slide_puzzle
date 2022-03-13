@@ -34,4 +34,27 @@ class Position extends Equatable implements Comparable<Position> {
       }
     }
   }
+
+
+  Map<String, dynamic> toJson() => _PositionToJson(this);
+
+
+
+
+  factory Position.fromJson(Map<String, dynamic?> json) => _PositionFromJson(json);
+
 }
+Position _PositionFromJson(Map<String, dynamic> json) {
+  return Position(
+      x: json['x'],
+      y: json['y']
+
+  );
+}
+
+
+Map<String, dynamic> _PositionToJson(Position instance) => <String, dynamic>{
+
+  'x': instance.x,
+  'y': instance.y
+};

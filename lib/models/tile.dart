@@ -48,4 +48,27 @@ class Tile extends Equatable {
         currentPosition,
         isWhitespace,
       ];
+
+
+
+  Map<String, dynamic> toJson() => _TileToJson(this);
+  factory Tile.fromJson(Map<dynamic, dynamic> json) => _TileFromJson(json);
 }
+Tile _TileFromJson(Map<dynamic, dynamic> json) {
+  return Tile(
+      imagePath: json['imagePath'],
+      value: json['value'],
+      correctPosition: Position.fromJson(json['correctPosition']),
+      currentPosition: Position.fromJson(json['currentPosition']),
+      isWhitespace: json['isWhitespace']
+  );
+}
+
+//2
+Map<String, dynamic> _TileToJson(Tile instance) => <String, dynamic>{
+  'imagePath': instance.imagePath,
+  'value': instance.value,
+  'correctPosition': instance.correctPosition.toJson(),
+  'currentPosition': instance.currentPosition.toJson(),
+  'isWhitespace': instance.isWhitespace
+};

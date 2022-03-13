@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:eco_slide_puzzle/data/data_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
 import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
@@ -98,7 +99,7 @@ void main() {
   group('PuzzleBloc', () {
     test('initial state is PuzzleState', () {
       expect(
-        PuzzleBloc(4, folderPath).state,
+        PuzzleBloc(4, folderPath,  repository: DataRepository()).state,
         PuzzleState(),
       );
     });
@@ -109,7 +110,8 @@ void main() {
       blocTest<PuzzleBloc, PuzzleState>(
         'emits solvable 3x3 puzzle, [incomplete], 0 correct tiles, and 0 moves '
         'when initialized with size 3 and shuffle equal to true',
-        build: () => PuzzleBloc(3, folderPath, random: random),
+        build: () => PuzzleBloc(3, folderPath, repository: DataRepository(),
+            random: random),
         act: (bloc) => bloc.add(PuzzleInitialized(shufflePuzzle: true)),
         expect: () => [PuzzleState(puzzle: puzzleSize3)],
         verify: (bloc) => expect(bloc.state.puzzle.isSolvable(), isTrue),
@@ -118,7 +120,7 @@ void main() {
       blocTest<PuzzleBloc, PuzzleState>(
         'emits unshuffled 3x3 puzzle, 8 correct tiles, and 0 moves '
         'when initialized with size 3 and shuffle equal to false',
-        build: () => PuzzleBloc(3, folderPath, random: random),
+        build: () => PuzzleBloc(3, folderPath, repository: DataRepository(),random: random),
         act: (bloc) => bloc.add(PuzzleInitialized(shufflePuzzle: false)),
         expect: () => [
           PuzzleState(
@@ -213,7 +215,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits [moved] when one tile was able to move',
-        build: () => PuzzleBloc(size, ''),
+        build: () => PuzzleBloc(size, '',repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: puzzle,
           numberOfCorrectTiles: 7,
@@ -255,7 +257,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits [moved] when mutiple tiles were able to move',
-        build: () => PuzzleBloc(size, folderPath),
+        build: () => PuzzleBloc(size, folderPath,repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: puzzle,
           numberOfCorrectTiles: 7,
@@ -302,7 +304,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits [cannotBeMoved] when tapped tile cannot move to whitespace',
-        build: () => PuzzleBloc(size, folderPath),
+        build: () => PuzzleBloc(size, folderPath,repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: puzzle,
           numberOfCorrectTiles: 7,
@@ -319,7 +321,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits [cannotBeMoved] when puzzle is complete',
-        build: () => PuzzleBloc(size, folderPath),
+        build: () => PuzzleBloc(size, folderPath,repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: puzzle,
           puzzleStatus: PuzzleStatus.complete,
@@ -337,7 +339,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits [PuzzleComplete] when tapped tile completes the puzzle',
-        build: () => PuzzleBloc(size, folderPath),
+        build: () => PuzzleBloc(size, folderPath, repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: puzzle,
           numberOfCorrectTiles: 7,
@@ -408,7 +410,7 @@ void main() {
 
       blocTest<PuzzleBloc, PuzzleState>(
         'emits new solvable 3x3 puzzle with 0 moves when reset with size 3',
-        build: () => PuzzleBloc(3, 'assets/images/owl/', random: random),
+        build: () => PuzzleBloc(3, 'assets/images/owl/', random: random,repository: DataRepository()),
         seed: () => PuzzleState(
           puzzle: initialSize3Puzzle,
           numberOfCorrectTiles: 1,

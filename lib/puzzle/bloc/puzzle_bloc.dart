@@ -1,48 +1,75 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:io';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:eco_slide_puzzle/models/models.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import '../../data/data_repository.dart';
+import '../../models/ScoreBoard.dart';
+import '../../models/player.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
 
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
-  PuzzleBloc(this._size, this.imgPath, {this.random})
-      : super(const PuzzleState()) {
+  var _uid = FirebaseAuth.instance.currentUser!.uid;
+  PuzzleBloc(this._size, this.imgPath, {this.random, required  DataRepository repository})
+      : repository = repository,
+      super(const PuzzleState()) {
     on<PuzzleInitialized>(_onPuzzleInitialized);
     on<TileTapped>(_onTileTapped);
     on<PuzzleReset>(_onPuzzleReset);
+
   }
 
   final int _size;
 
   final Random? random;
-
+  final DataRepository repository;
   String imgPath;
 
-  void _onPuzzleInitialized(
+  ScoreBoard scoreBoard = ScoreBoard(score: 0, numberOfMoves: 0, timeTaken: 0,
+      datePlayed: DateTime.now(), size: 0);
+
+
+  void _onPuzzleInitialized (
     PuzzleInitialized event,
     Emitter<PuzzleState> emit,
-  ) {
-    final puzzle = _generatePuzzle(_size, shuffle: event.shufflePuzzle);
-    emit(
-      PuzzleState(
-        puzzle: puzzle.sort(),
-        numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
-      ),
-    );
+  ) async {
+      scoreBoard.size = _size;
+      //final puzzle = await _generatePuzzle(_size, shuffle: event.shufflePuzzle);
+      final puzzle = await _generatePuzzle(_size, shuffle: false);
+
+      emit(
+        PuzzleState(
+          puzzle: puzzle.sort(),
+          puzzleStatus: PuzzleStatus.incomplete,
+          numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
+          numberOfMovesTotal: scoreBoard.numberOfMoves,
+        ),
+
+      );
+
   }
 
-  void _onTileTapped(TileTapped event, Emitter<PuzzleState> emit) {
+  void dispose() {
+    close();
+
+  }
+  void _onTileTapped(TileTapped event, Emitter<PuzzleState> emit) async{
     final tappedTile = event.tile;
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     if (state.puzzleStatus == PuzzleStatus.incomplete) {
       if (state.puzzle.isTileMovable(tappedTile)) {
         final mutablePuzzle = Puzzle(tiles: [...state.puzzle.tiles]);
         final puzzle = mutablePuzzle.moveTiles(tappedTile, []);
-        if (puzzle.isComplete()) {
+        if (puzzle.isComplete() && emit.isDone) {
+          await updateScoreBoard(1);
           emit(
             state.copyWith(
               puzzle: puzzle.sort(),
@@ -50,19 +77,29 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
               tileMovementStatus: TileMovementStatus.moved,
               numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
               numberOfMoves: state.numberOfMoves + 1,
+              numberOfMovesTotal: scoreBoard.numberOfMoves,
               lastTappedTile: tappedTile,
             ),
           );
+
+
+          await updateTiles(uid, state.puzzle.tiles);
         } else {
+          await updateScoreBoard(1);
           emit(
+
             state.copyWith(
               puzzle: puzzle.sort(),
               tileMovementStatus: TileMovementStatus.moved,
               numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
               numberOfMoves: state.numberOfMoves + 1,
+              numberOfMovesTotal: scoreBoard.numberOfMoves,
               lastTappedTile: tappedTile,
             ),
           );
+
+
+          await updateTiles(uid, state.puzzle.tiles);
         }
       } else {
         emit(
@@ -76,47 +113,69 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
     }
   }
 
-  void _onPuzzleReset(PuzzleReset event, Emitter<PuzzleState> emit) {
-    final puzzle = _generatePuzzle(_size);
+  void _onPuzzleReset(PuzzleReset event, Emitter<PuzzleState> emit) async {
+    final puzzle = await  _generatePuzzle(_size);
+    updatePlayer(0);
+    resetScoreBoard();
+    await (0);
+
     emit(
       PuzzleState(
         puzzle: puzzle.sort(),
+        puzzleStatus: PuzzleStatus.incomplete,
+        numberOfMovesTotal: scoreBoard.numberOfMoves,
         numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
       ),
     );
   }
 
   /// Build a randomized, solvable puzzle of the given size.
-  Puzzle _generatePuzzle(int size, {bool shuffle = true}) {
+  Future<Puzzle> _generatePuzzle(int size, {bool shuffle = true}) async
+  {
+    List<Tile> tiles = [];
     final correctPositions = <Position>[];
     final currentPositions = <Position>[];
     final whitespacePosition = Position(x: size, y: size);
 
-    // Create all possible board positions.
-    for (var y = 1; y <= size; y++) {
-      for (var x = 1; x <= size; x++) {
-        if (x == size && y == size) {
-          correctPositions.add(whitespacePosition);
-          currentPositions.add(whitespacePosition);
-        } else {
-          final position = Position(x: x, y: y);
-          correctPositions.add(position);
-          currentPositions.add(position);
+    await repository.getTiles(_uid, _size, tiles);
+   // print( " TILES " + tiles.toString());
+    /*
+    tiles.forEach((element) {
+      print(" OUTSIDE GET TILES " + element.toJson().toString()); });
+
+     */
+    if (tiles.isNotEmpty && !shuffle){
+      print ("=============== Saved tiles found");
+      shuffle = false;
+    }else {
+      print ("++++++++++++ Nothing saved in Tiles ");
+
+      shuffle= true;
+      // Create all possible board positions.
+      for (var y = 1; y <= size; y++) {
+        for (var x = 1; x <= size; x++) {
+          if (x == size && y == size) {
+            correctPositions.add(whitespacePosition);
+            currentPositions.add(whitespacePosition);
+          } else {
+            final position = Position(x: x, y: y);
+            correctPositions.add(position);
+            currentPositions.add(position);
+          }
         }
       }
+
+      if (shuffle) {
+        // Randomize only the current tile posistions.
+        currentPositions.shuffle(random);
+      }
+
+      tiles = _getTileListFromPositions(
+        size,
+        correctPositions,
+        currentPositions,
+      );
     }
-
-    if (shuffle) {
-      // Randomize only the current tile posistions.
-      currentPositions.shuffle(random);
-    }
-
-    var tiles = _getTileListFromPositions(
-      size,
-      correctPositions,
-      currentPositions,
-    );
-
     var puzzle = Puzzle(tiles: tiles);
 
     if (shuffle) {
@@ -131,8 +190,15 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
         );
         puzzle = Puzzle(tiles: tiles);
       }
-    }
 
+    }
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+
+    //await updateTiles(uid, tiles);
+    await setupPlayer();
+    await repository.getStartupScoreBoard(uid, scoreBoard);
+    print (" after startup score board is " + scoreBoard.toJson().toString());
+    //await updateScoreBoard(0);
     return puzzle;
   }
 
@@ -192,4 +258,100 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
 
   //   return output;
   // }
+
+  setupPlayer() async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    var email = FirebaseAuth.instance.currentUser!.email;
+    print ("uid " + uid);
+    print ("email " + email!);
+
+    try {
+     var _gamePlayer =
+      await repository.getPlayer(uid);
+
+      if (_gamePlayer == null) {
+        print (" player is null");
+
+        if (uid != null && email != null) {
+          _gamePlayer = new Player(
+              email: email,
+              //uid: uid,
+              dateCreated: DateTime.now()
+
+              );
+
+
+          await repository.addPlayer(uid,_gamePlayer);
+          return;
+        }
+      } else {
+        print('Found it');
+        print(_gamePlayer.email);
+      }
+    }catch (error){
+      print("Exception is caught ........");
+      print(error.toString());
+    }
+  }
+
+  updatePlayer(int numMoves) async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    var email = FirebaseAuth.instance.currentUser!.email;
+    print ("uid " + uid);
+    print ("email " + email!);
+    print ("Number of Moves " + numMoves.toString());
+
+    try {
+      Player? _gamePlayer;
+      _gamePlayer =
+      await repository.getPlayer(uid);
+   //   _gamePlayer?.scoreBoard.numberOfMoves += numMoves;
+      print(" FOund PLayer before update " + _gamePlayer!.toJson().toString());
+      await repository.updatePlayer(uid,_gamePlayer);
+      print ("Updating player " + _gamePlayer.toString());
+      return ;
+
+
+    }catch (error){
+      print("Exception is caught ........");
+      print(error.toString());
+    }
+  }
+  updateTiles(String uid, List<Tile> tiles) async{
+    print(" Updating tiles");
+      await repository.updateTiles(uid,_size, tiles);
+  }
+
+  updateScoreBoard(int moves) async {
+    try {
+      var uid = FirebaseAuth.instance.currentUser!.uid;
+
+      print(" Score Board " + scoreBoard.toJson().toString());
+
+        ScoreBoard toUpdate;
+        if (moves > 0) {
+          scoreBoard.numberOfMoves = scoreBoard.numberOfMoves + moves;
+          toUpdate = scoreBoard;
+
+          await repository.updateScoreBoard(uid, toUpdate);
+        }
+
+    } catch (error) {
+      print(" Error " + error.toString());
+    }
+  }
+    resetScoreBoard() async {
+      try {
+        var uid = FirebaseAuth.instance.currentUser!.uid;
+
+
+        scoreBoard.numberOfMoves = 0;
+
+        await repository.updateScoreBoard(uid, scoreBoard);
+
+      }catch(error){
+        print (" Error " + error.toString());
+      }
+    }
+
 }

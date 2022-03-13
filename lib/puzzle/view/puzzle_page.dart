@@ -1,3 +1,4 @@
+import 'package:eco_slide_puzzle/data/data_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eco_slide_puzzle/layout/layout.dart';
@@ -5,6 +6,8 @@ import 'package:eco_slide_puzzle/models/models.dart';
 import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
 import 'package:eco_slide_puzzle/theme/theme.dart';
 import 'package:eco_slide_puzzle/timer/timer.dart';
+
+import 'LoadingOverlay.dart';
 
 /// {@template puzzle_page}
 /// The root page of the puzzle UI.
@@ -64,14 +67,16 @@ class PuzzleView extends StatelessWidget {
           ticker: const Ticker(),
         ),
         child: BlocProvider(
-          create: (context) => PuzzleBloc(size, imagePath)
+          create: (context) => PuzzleBloc(size, imagePath,
+           repository:  DataRepository())
             ..add(
               PuzzleInitialized(
                 shufflePuzzle: shufflePuzzle,
               ),
             ),
-          child: const _Puzzle(
+          child:  _Puzzle(
             key: Key('puzzle_view_puzzle'),
+            imagePath: imagePath,
           ),
         ),
       ),
@@ -80,7 +85,8 @@ class PuzzleView extends StatelessWidget {
 }
 
 class _Puzzle extends StatelessWidget {
-  const _Puzzle({Key? key}) : super(key: key);
+  final String imagePath;
+ _Puzzle({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +98,7 @@ class _Puzzle extends StatelessWidget {
         return Stack(
           children: [
             theme.layoutDelegate.backgroundBuilder(state),
+            theme.layoutDelegate.PuzzleSolutonImageBuilder(imagePath),
             SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -227,7 +234,9 @@ class _PuzzleSections extends StatelessWidget {
 /// {@endtemplate}
 class PuzzleBoard extends StatelessWidget {
   /// {@macro puzzle_board}
+
   const PuzzleBoard({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -239,9 +248,11 @@ class PuzzleBoard extends StatelessWidget {
 
     return BlocListener<PuzzleBloc, PuzzleState>(
       listener: (context, state) {
+
         if (theme.hasTimer && state.puzzleStatus == PuzzleStatus.complete) {
           context.read<TimerBloc>().add(const TimerStopped());
         }
+
       },
       child: theme.layoutDelegate.boardBuilder(
         size,
@@ -276,4 +287,6 @@ class _PuzzleTile extends StatelessWidget {
         ? theme.layoutDelegate.whitespaceTileBuilder()
         : theme.layoutDelegate.tileBuilder(tile, state);
   }
+
+
 }
