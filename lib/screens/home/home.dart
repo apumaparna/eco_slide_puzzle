@@ -51,10 +51,12 @@ class Home extends StatelessWidget {
             onPressed: () async {
               return context
                   .read<AuthenticationService>()
-                  .signOut().then((success) {
-                    if (success) {
-                      Navigator.pushNamed(context, LandingScreen.routeName);
-                    }});
+                  .signOut()
+                  .then((success) {
+                if (success) {
+                  Navigator.pushNamed(context, LandingScreen.routeName);
+                }
+              });
             },
             child: const Text('LOG OUT')),
         const Spacer(),

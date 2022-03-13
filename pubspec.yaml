@@ -49,7 +49,7 @@ dependencies:
   flutter_localized_locales: ^2.0.3
   firebase: ^9.0.2
   firebase_core: ^1.11.0
-  firebase_analytics: ^9.0.5
+  # firebase_analytics: ^9.0.5
   firebase_auth: ^3.3.5
   firebase_database: ^9.0.5
   # file_saver: ^0.0.10
