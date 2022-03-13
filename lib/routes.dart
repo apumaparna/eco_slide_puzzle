@@ -1,3 +1,5 @@
+import 'package:eco_slide_puzzle/models/leaderBoardData.dart';
+import 'package:eco_slide_puzzle/puzzle/view/LeaderBoardPage.dart';
 import 'package:eco_slide_puzzle/puzzle/view/puzzle_page.dart';
 import 'package:eco_slide_puzzle/screens/Landing/landing_screen.dart';
 import 'package:eco_slide_puzzle/screens/Login/log_in_screen.dart';
@@ -19,6 +21,8 @@ final Map<String, WidgetBuilder> routes = {
       const PuzzlePage(size: 3, imagePath: 'assets/images/owl/'),
   Puzzle2.routeName: (context) =>
       const PuzzlePage(size: 4, imagePath: 'assets/images/tester/'),
+  LeaderBoard.routeName: (context) =>
+  const LeaderBoardPage(),
 };
 
 class Puzzle2 {
@@ -27,4 +31,8 @@ class Puzzle2 {
 
 class Puzzle1 {
   static String routeName = '/puzzle1';
+}
+
+class LeaderBoard {
+  static var routeName = "/leaderBoard";
 }

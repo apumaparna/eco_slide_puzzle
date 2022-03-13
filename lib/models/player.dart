@@ -1,10 +1,10 @@
 
-import 'package:flutter/material.dart';
 
-//1
+//
 Player _PlayerFromJson(Map<dynamic, dynamic> json) {
   return Player(
     email: json['email'],
+    displayName: json['displayName'],
     //uid: json['uid'],
     dateCreated: DateTime.parse(json['dateCreated'])
 
@@ -12,9 +12,10 @@ Player _PlayerFromJson(Map<dynamic, dynamic> json) {
   );
 }
 
-//2
+//
 Map<String, dynamic> _PlayerToJson(Player instance) => <String, dynamic>{
   'email': instance.email,
+  'displayName': instance.displayName,
   //'uid': instance.uid,
   'dateCreated': instance.dateCreated.toIso8601String(),
  // 'scoreBoard': _ScoreBoardToJson(instance.scoreBoard),
@@ -22,6 +23,7 @@ Map<String, dynamic> _PlayerToJson(Player instance) => <String, dynamic>{
 
 class Player {
   final String email;
+ final String? displayName;
  // final String uid;
   final DateTime dateCreated;
  // ScoreBoard scoreBoard;
@@ -29,6 +31,7 @@ class Player {
 
   Player(
       {required this.email,
+        required this.displayName,
     //    required this.uid,
         required this.dateCreated
       // required this.scoreBoard
@@ -40,10 +43,5 @@ class Player {
   Map<String, dynamic> toJson() => _PlayerToJson(this);
   @override
   String toString() => "Player<$email>";
-/*
-  ScoreBoard get player_scoreBoard {
-    return this.scoreBoard;
-  }
-  */
 
 }

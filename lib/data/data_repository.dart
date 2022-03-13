@@ -2,12 +2,14 @@
 
 
 import 'dart:collection';
-import 'dart:io';
+
 
 import 'package:eco_slide_puzzle/models/ScoreBoard.dart';
+
 import 'package:eco_slide_puzzle/models/player.dart';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/tile.dart';
 
@@ -23,11 +25,13 @@ class DataRepository {
     DatabaseReference ref = FirebaseDatabase.instance.ref(
         "players/" + uid + "/profile/");
 
-    var res = await ref.set(player.toJson()).then((value) =>
+   await ref.set(player.toJson());
+        /*.then((value) =>
         print("user added")).catchError((e) {
-      print('Got error: $e'); // Finally, callback fires.
-
-    });
+      print('Got error: $e'); // Finally, callback fires.}
+    }
+    );
+    */
 
     return;
   }
@@ -39,14 +43,14 @@ class DataRepository {
    // String uid = player.uid;
     try {
       var res = await ref.child(uid + "/profile/")
-          .update(player.toJson())
-          .whenComplete(() => print("user updated"));
+          .update(player.toJson());
+
+         // .whenComplete(() => print("user updated"));
       return res;
     }
 
-    on Exception catch (error) {
-      print("_________________________________");
-      print(error);
+    on Exception {
+      rethrow;
     }
   }
 
@@ -63,15 +67,17 @@ class DataRepository {
       }
       Map<String, dynamic> value = result.snapshot.value as Map<String,
           dynamic>;
-
+      if (kDebugMode) {
+        print (" value " + value.toString());
+      }
       return Player.fromJson(value);
     });
   }
 
   updateTiles(String uid, int size, List<Tile> tiles) async {
-    print("Going to update " + uid);
+    //print("Going to update " + uid);
     try {
-      var tileList = [];
+
       Map<String, Object?> tempMap = HashMap();
       tiles.forEach((element) {
 
@@ -82,14 +88,16 @@ class DataRepository {
       });
 
       await ref.child(uid + "/" + size.toString() + "/tile/" ).update(
-          tempMap).
+          tempMap);
+          /*.
       whenComplete(() => print("Tile updated"));
-
+      */
       return;
     }
-    on Exception catch (error) {
-      print("_________________________________");
-      print(error);
+    on Exception {
+      //print("_________________________________");
+
+      rethrow;
     }
   }
 
@@ -111,7 +119,9 @@ class DataRepository {
             }
 
         });
-      //tiles.forEach((element) { print(" INSIDE GET TILES " + element.toJson().toString()); });
+      tiles.forEach((element) { if (kDebugMode) {
+        print(" INSIDE GET TILES " + element.toJson().toString());
+      } });
 
     });
   }
@@ -120,14 +130,16 @@ class DataRepository {
    // print("Going to update score board" + uid);
     try {
         await ref.child(uid + "/" + scoreBoard.size.toString() + "/score/" ).update(
-            scoreBoard.toJson()).
-        whenComplete(() => print("Score updated"));
+            scoreBoard.toJson());
+       // whenComplete(() => print("Score updated"));
 
       return;
     }
     on Exception catch (error) {
-      print("_________________________________");
-      print(error);
+     // print("_________________________________");
+      if (kDebugMode) {
+        print(error);
+      }
     }
   }
 
@@ -142,15 +154,7 @@ class DataRepository {
 
       var sbTemp = ScoreBoard.fromJson(event.snapshot.value as Map<String, dynamic>);
       sb.copyWith(sbTemp);
-      /*
-      sb.numberOfMoves = sbTemp.numberOfMoves;
-      sb.datePlayed = sbTemp.datePlayed;
-      sb.timeTaken = sbTemp.timeTaken;
-      sb.score = sbTemp.score;
-      sb.size = sbTemp.size;
-      print(" Score Saved is " + sb.toString());
 
-       */
       isUpdated = true;
     });
     return isUpdated;
@@ -168,19 +172,53 @@ class DataRepository {
           dynamic>;
       var sbTemp = ScoreBoard.fromJson(value);
       sb.copyWith(sbTemp);
-      /*
-      sb.numberOfMoves = sbTemp.numberOfMoves;
-      sb.datePlayed = sbTemp.datePlayed;
-      sb.timeTaken = sbTemp.timeTaken;
-      sb.score = sbTemp.score;
-      sb.size = sb.size;
-      */
 
-     // print (" Score board GOT " + value.toString());
 
-      print (" Score board GOT from Json " + sb.toJson().toString());
+      if (kDebugMode) {
+        print (" Score board GOT " + value.toString());
+      }
+
+      if (kDebugMode) {
+        print (" Score board GOT from Json " + sb.toJson().toString());
+      }
       return sb;
     });
 
   }
-}
+
+  getLeaderBoard() async {
+
+    if (kDebugMode) {
+      print (" got DB reference " + ref.get().toString());
+    }
+   // ref = ref.child("profile");
+    return await ref.once().then((result) {
+      var res = result.snapshot.value as Iterable;
+
+      if (null == res) {
+        if (kDebugMode) {
+          print ("result is empty");
+        }
+        return null;
+      }
+      if (kDebugMode) {
+        print (" res is " + res.toString());
+      }
+      // Map<String, dynamic> value = result.snapshot.value as Map<String,
+      //dynamic>;
+
+      // print (" Score board GOT " + value.toString());
+      for(var item in res) {
+        if (kDebugMode) {
+          print(item);
+        }
+      }
+      //print(" value GOT from Json " + result.snapshot.value.toString());
+      var sb = result.snapshot.value as Future<dynamic>;
+      return sb;
+    });
+  }
+  getLeaderBoardQuery() {
+    return ref;
+  }
+  }

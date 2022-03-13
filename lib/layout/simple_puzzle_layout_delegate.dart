@@ -246,6 +246,7 @@ class SimpleStartSection extends StatelessWidget {
           numberOfMoves: state.numberOfMoves,
           numberOfTilesLeft: state.numberOfTilesLeft,
           numberOfMovesTotal: state.numberOfMovesTotal,
+          score: state.score
         ),
         const ResponsiveGap(large: 32),
         ResponsiveLayoutBuilder(

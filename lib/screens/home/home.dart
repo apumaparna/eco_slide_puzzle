@@ -44,7 +44,16 @@ class Home extends StatelessWidget {
                     },
                     child: const Text('Puzzle 2'),
                     style: style)),
+            Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, LeaderBoard.routeName);
+                    },
+                    child: const Text('Leader Board'),
+                    style: style)),
           ],
+
         ),
         const Spacer(),
         ElevatedButton(

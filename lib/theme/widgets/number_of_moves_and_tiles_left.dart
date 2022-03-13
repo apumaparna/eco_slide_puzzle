@@ -10,13 +10,15 @@ import 'package:eco_slide_puzzle/typography/typography.dart';
 /// and how many puzzle tiles are not in their correct position.
 /// {@endtemplate}
 class NumberOfMovesAndTilesLeft extends StatelessWidget {
+  final int score;
+
   /// {@macro number_of_moves_and_tiles_left}
   const NumberOfMovesAndTilesLeft({
     Key? key,
     required this.numberOfMoves,
     required this.numberOfTilesLeft,
     required this.numberOfMovesTotal,
-    this.color,
+    this.color, required this.score,
   }) : super(key: key);
 
   /// The number of moves to be displayed.
@@ -86,11 +88,26 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
               TextSpan(
                 text:
                     //'text',
-                    ' ${context.l10n.puzzleNumberOfTilesLeft}',
+                    ' ${context.l10n.puzzleNumberOfTilesLeft} | ',
                 style: bodyTextStyle.copyWith(
                   color: textColor,
                 ),
               ),
+              TextSpan(
+                text: score.toString(),
+                style: PuzzleTextStyle.headline4.copyWith(
+                  color: textColor,
+                ),
+              ),
+              TextSpan(
+                text:
+                //'text',
+                ' ${context.l10n.puzzleScore}',
+                style: bodyTextStyle.copyWith(
+                  color: textColor,
+                ),
+              ),
+
             ],
           ),
         );

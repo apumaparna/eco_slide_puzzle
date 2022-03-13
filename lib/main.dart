@@ -6,19 +6,27 @@
 // https://opensource.org/licenses/MIT.
 
 
-import 'package:eco_slide_puzzle/app/app.dart';
-import 'package:eco_slide_puzzle/bootstrap.dart';
-import 'package:firebase_database/firebase_database.dart';
+
+import 'firebase_options.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:eco_slide_puzzle/app/app.dart';
+import 'package:eco_slide_puzzle/bootstrap.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await splitImage('assets/images/solution.jpg', 3);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  try {
+    await Firebase.initializeApp(
+
+        options: DefaultFirebaseOptions.currentPlatform
+
+    );
+  }catch(error){
+    print(error);
+    }
+
   bootstrap(() => const App());
-  FirebaseDatabase database = FirebaseDatabase.instance;
+
 }
