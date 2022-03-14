@@ -174,8 +174,8 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
       top: 0,
       child: ResponsiveLayoutBuilder(
         small: (_, __) => SizedBox(
-          width: 184,
-          height: 118,
+          width: 128,
+          height: 82,
           child: Image.asset(
             imagePath + "solution.jpg",
 
@@ -183,8 +183,8 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
           ),
         ),
         medium: (_, __) => SizedBox(
-          width: 380.44,
-          height: 214,
+          width: 266,
+          height: 149,
           child: Image.asset(
             imagePath + "solution.jpg",
 
@@ -194,8 +194,8 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
         large: (_, __) => Padding(
           padding: const EdgeInsets.only(bottom: 53),
           child: SizedBox(
-            width: 568.99,
-            height: 320,
+            width: 397,
+            height: 224,
             child: Image.asset(
               imagePath + "/solution.jpg",
 

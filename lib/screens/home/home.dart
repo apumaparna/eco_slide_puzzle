@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, LeaderBoard.routeName);
                     },
-                    child: const Text('Leader Board'),
+                    child: const Text('Leader'),
                     style: style)),
           ],
 

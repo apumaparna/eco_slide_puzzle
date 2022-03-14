@@ -11,31 +11,26 @@ import '../../models/leaderBoardData.dart';
 class LeaderBoardPage extends StatelessWidget {
   const LeaderBoardPage({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Code Sample';
+  static const String _title = 'Leader Board';
 
   @override
   Widget build(BuildContext context) {
   return const MaterialApp(
   title: _title,
-  home: MyStatefulWidget(),
+  home: LBStatefulWidget(),
   );
   }
   }
 
-  class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  class LBStatefulWidget extends StatefulWidget {
+  const LBStatefulWidget({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<LBStatefulWidget> createState() => _LBStatefulWidgetState();
   }
 
-  class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  /*
-  final Future<String> _calculation = Future<String>.delayed(
-  const Duration(seconds: 2),
-  () => 'Data Loaded',
-  );
-*/
+  class _LBStatefulWidgetState extends State<LBStatefulWidget> {
+  
     DataRepository datastore = DataRepository();
 
   @override
