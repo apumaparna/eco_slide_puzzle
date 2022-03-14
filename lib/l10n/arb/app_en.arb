@@ -23,5 +23,9 @@
     "puzzleCompleted": "Well done. Congrats!",
     "@puzzleCompleted": {
         "description": "Shown as the success state when the puzzle is completed"
-    }
+    },
+    "puzzleScore": "Score",
+            "@puzzleScore": {
+                "description": "Indicates score"
+     }
 }

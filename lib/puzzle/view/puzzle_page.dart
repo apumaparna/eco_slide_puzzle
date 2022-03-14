@@ -7,7 +7,6 @@ import 'package:eco_slide_puzzle/puzzle/puzzle.dart';
 import 'package:eco_slide_puzzle/theme/theme.dart';
 import 'package:eco_slide_puzzle/timer/timer.dart';
 
-import 'LoadingOverlay.dart';
 
 /// {@template puzzle_page}
 /// The root page of the puzzle UI.
