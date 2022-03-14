@@ -32,9 +32,18 @@ class Home extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.pushNamed(context, Puzzle0.routeName);
+                      },
+                      child: const Text('Basic'),
+                      style: style,
+                    )),
+                Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ElevatedButton(
+                      onPressed: () {
                         Navigator.pushNamed(context, Puzzle1.routeName);
                       },
-                      child: const Text('Puzzle 1'),
+                      child: const Text('Intermediate'),
                       style: style,
                     )),
                 Padding(
@@ -43,7 +52,7 @@ class Home extends StatelessWidget {
                         onPressed: () {
                           Navigator.pushNamed(context, Puzzle2.routeName);
                         },
-                        child: const Text('Puzzle 2'),
+                        child: const Text('Advance'),
                         style: style)),
                 Padding(
                     padding: const EdgeInsets.all(10.0),

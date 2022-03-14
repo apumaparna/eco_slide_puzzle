@@ -80,6 +80,8 @@ flutter:
     - assets/images/tester/
     - assets/images/owl/
     - assets/images/puffin/
+    - assets/images/owl/
+    - assets/images/lion/
   fonts:
     - family: GoogleSans
       fonts:

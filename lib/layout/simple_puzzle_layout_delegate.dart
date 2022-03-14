@@ -177,7 +177,7 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
           width: 128,
           height: 82,
           child: Image.asset(
-            imagePath + "solution.jpg",
+            imagePath + "solution_small.jpg",
 
             key: const Key('answerImageURL'),
           ),
@@ -186,7 +186,7 @@ class SimplePuzzleLayoutDelegate extends PuzzleLayoutDelegate {
           width: 266,
           height: 149,
           child: Image.asset(
-            imagePath + "solution.jpg",
+            imagePath + "solution_medium.jpg",
 
             key: const Key('answerImageURL'),
           ),

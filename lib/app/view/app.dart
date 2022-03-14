@@ -46,7 +46,15 @@ class _AppState extends State<App> {
         Image.asset('assets/images/simple_dash_small.png').image,
         context,
       );
-
+      precacheImage(
+        Image.asset('assets/images/tester/solution.jpg').image,
+        context,
+      );
+      // load all the images for the owl
+      for (int img = 0; img < 4; img++) {
+        await precacheImage(
+            Image.asset('assets/images/lion/$img.jpg').image, context);
+      }
       // load all the images for the owl
       for (int img = 0; img < 9; img++) {
         await precacheImage(

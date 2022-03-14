@@ -17,6 +17,8 @@ final Map<String, WidgetBuilder> routes = {
   SignUpScreen.routeName: (context) => const SignUpScreen(),
   LogInScreen.routeName: (context) => const LogInScreen(),
   Home.routeName: (context) => const Home(),
+  Puzzle0.routeName: (context) =>
+  const PuzzlePage(size: 2, imagePath: 'assets/images/lion/'),
   Puzzle1.routeName: (context) =>
       const PuzzlePage(size: 3, imagePath: 'assets/images/owl/'),
   Puzzle2.routeName: (context) =>
@@ -24,7 +26,9 @@ final Map<String, WidgetBuilder> routes = {
   LeaderBoard.routeName: (context) =>
   const LeaderBoardPage(),
 };
-
+class Puzzle0 {
+  static String routeName = '/puzzle0';
+}
 class Puzzle2 {
   static var routeName = '/puzzle2';
 }
