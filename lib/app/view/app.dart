@@ -47,7 +47,7 @@ class _AppState extends State<App> {
         context,
       );
       precacheImage(
-        Image.asset('assets/images/tester/solution.jpg').image,
+        Image.asset('assets/images/gorilla/solution.jpg').image,
         context,
       );
       // load all the images for the owl
@@ -64,7 +64,7 @@ class _AppState extends State<App> {
       // load all the images for the tester
       for (int img = 0; img < 15; img++) {
         await precacheImage(
-            Image.asset('assets/images/tester/$img.jpg').image, context);
+            Image.asset('assets/images/gorilla/$img.jpg').image, context);
       }
     });
   }

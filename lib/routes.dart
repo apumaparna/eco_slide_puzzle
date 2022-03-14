@@ -22,7 +22,7 @@ final Map<String, WidgetBuilder> routes = {
   Puzzle1.routeName: (context) =>
       const PuzzlePage(size: 3, imagePath: 'assets/images/owl/'),
   Puzzle2.routeName: (context) =>
-      const PuzzlePage(size: 4, imagePath: 'assets/images/tester/'),
+      const PuzzlePage(size: 4, imagePath: 'assets/images/gorilla/'),
   LeaderBoard.routeName: (context) =>
   const LeaderBoardPage(),
 };
